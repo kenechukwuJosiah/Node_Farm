@@ -1,0 +1,99 @@
+#Node.Js
+
+Node.js is a javascript runtime built on google's open source v8 javascript enegin.
+
+Javascript Runtime: Node.js is a good example of javascript run time. With javascript running outside the browser we can do so much more that were completly impossible before like accessing the file system, better network capablities. which gives us perfect conditions for using Node.js as a web server (via networking). With node we can now build fast, scalable network application(back-end).
+
+Node.js pros
+Node.js is single threaded, based on event driven, non-blocking I/O model i.e it very fast.
+perfect for building fast and scalable data-intensive app;
+conpanies like netflix, uber, paypal, ebay are now using node in production. i.e is to show that the nodejs technology is stable.
+With nodejs you don't have to learn new language. you'll us javascript accross the entire stack. which makes development faster and more effiecnt development.
+
+Use Cases for Node.js 
+-Building API with database behind it like NoSQL.
+-Data streaming like youTube.
+-Real-time chat application.
+-Server-side web application i.e server side rendered applicaiton
+
+
+Nodejs way of executing is read, eval, print, loop aka REPL.
+In to order to start using the nodejs REPL firt get node installed then enter node in the command line and and hit enter. 
+Note: Hit tab to see all the global varriable available.
+_ in node denotes the previous varriable.
+
+Note:- The  require() function is used to get modules.
+
+Reading and Wrting into the file system Synchronously.
+with the fs module we can read and write into the file system using the readFileSync() and readFile() methods on the fs module which hold the object that is being return from the fs module.
+
+Reading file with readFileSync() method:- it takes two parameters which are @param1 file directory and @param2 the charset i.e character encoding.
+
+e.g const textIn = fs.readFileSync('<directory>','<(utf-8)charset>');
+console.log(textIn);
+
+Writing into file with the writeFileSync() method:- It takes two parameters which are @param1 the file path and @param2 the content we want to write into the provided path. Does not return anything.
+
+e.g fs.writeFileSync('./txt/output.text',textOut);
+console.log('file written') //to chech if it was successful.
+
+Reading and Writing in the file system Asynchronously.
+
+#readFile() method:- This takes three parameters which are @param1 file path @param2 charset and the last parameter is the called function for handling error and success. if error you want to return an error message and if success it returns returns the data being read. The callback takes two parameters which are the error object and the data being read. 
+
+#writefile() method: This takes four parameters which are @param1 the path, @param2 the data to be read, @param3 the charset and @param4 the callback which takes only one parameter which is the error.
+
+Note: The sync methods of reading and writing files here blocking i.e The code execution are read line by line and when there's a huge block of code executing then all the codes under will have to wait till the one on top finishes. The error is due to the one threaded nature of nodejs which means that it runs one code at a time for e.g you have a chat app that has 2million user and this type of execution and this delay occures, that means the remaining 1.999million users will have to wait. So aviod this problem use the readFile and writeFile instead because they run asynchronously which does the heavy work at the background i.e it stays there until the execution is finished. Then it will be called back to the single thread for execution.
+Note: for better I/O (i.e input and output) model use the readFile and writeFile methods.
+
+////////////////////////////////////////////
+//Node modules
+
+-fs:- with the file system we can read from and write into file system.
+-http:- helps with networking i.e creating server and making request and responses available. 
+
+
+#The http Module 
+For networking. The http module is an object that we can access the createServer() method in. this createServer() method takes two parameters which are the req object and res object. The http.createServer() method returns a server object we can store in a varriable in order to lisen to for any req. Then listen method takes three parameters aswell, which are @param1 the port, @param2 the host and @param3 the callback function we can use to display something showing the server is been started.
+
+
+//////////////////////////////////
+//Routing 
+Routing simply means implementing different actions for different url. In node we have access to another module called url for networking. In our http.createServer() method which is having req object and res object we have access to the url which available in the req object. with this we can now chech for url being entered to perform different actions based on the type of url. with res object we can return something to the browser.
+Note: when you want to return a json file when a partcular route is hit use the res.writeHead() method to tell the browser what type of file you are sending.
+
+
+/////////////////////////////////////
+//API
+Api is some service which we can request some data.
+when sending an api to the browser use the res.writeHead() to let the browser.
+
+Note: in nodejs every single file is treated as module. 
+
+///////////////////////////////////////////
+//NPM
+Known as node package manager. is a command line interface app which comes with node app when we install it. Npm is use to intall and manage open source packages. This packages come from the package repository npm. so npm is both the command line interface app and also the repository itself. 
+
+With npm init on the command line we creat a config file that says everything about our project. And aswell keep track to changes in our project. 
+
+In npm there are two types of packages that we can install with npm and two types of intall that they have.
+
+So the two types of packages that we can install are simple dependences or regular dependences and devDependences.
+
+The regular dependences are packages we include in our codes or rather our code depends on them to function well e.g express, slugify(for making names out of url).
+Note: npm install <packagename> for intalling regualr packages i.e dependences
+
+while
+devDependences are for development, they are not needed for production. They are just there to help us with development. Our code does not depend on them we simply need them for development.
+Note: npm install <packagename> --save-dev form development i.e devDependences.
+
+Local type of installation and global installation.
+Localy installed packages are only available in your project folder i.e they are not available else where.
+
+while Globaly installed packages are available anywhere in your pc.
+Note: npm install nodemon -g --save-dev for installing devDependences globaly. 
+npm intall <packagename> -g for regualr packages. 
+
+///////////////////////////////////////////////
+//Packaged Versioning
+Every node package follows the semantic version notation which means that there version numbers are expressed with those three numbers. The first number stands for the major version, the second one the minor version(i.e introduces some new changes or features in to the code. This new features does not break the initial code. so it stands for adding new features) while the last one is the patch version(i.e for bug fixing. when ever there's fixed bug the number increases by one.). This ^ sign means that the project accepts patch and minor releases. ~ accepts only patch changes. * accepts all changes.
